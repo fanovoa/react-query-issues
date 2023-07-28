@@ -14,10 +14,10 @@ const client = new QueryClient();
 
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+  // <React.StrictMode>
      <QueryClientProvider client={client}>
         <ReactQueryDevtools />
         <RouterProvider router={ router } />
     </QueryClientProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 )
