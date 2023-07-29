@@ -3,7 +3,7 @@ import { Issue ,State } from '../interfaces';
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { getIssueInfo } from '../hooks/useIssue';
+import { getIssueComments, getIssueInfo } from '../hooks/useIssue';
 
 interface Props {
     issue : Issue
@@ -19,17 +19,33 @@ export const IssueItem:FC<Props> = ( { issue }) => {
     const { avatar_url , login  } = user;
 
 
-    const onMouseEnter = () => {
+    const prefetchData = () => {
             queryClient.prefetchQuery(
                 ['issue', issue.number],
                 ()=> getIssueInfo( issue.number )
             )
+            queryClient.prefetchQuery(
+                ['issue', issue.number,'comments'],
+                ()=> getIssueComments( issue.number )
+            )
+
+    }
+
+    const preSetData = () => {
+
+        queryClient.setQueryData(
+            ['issue', issue.number],
+           issue,
+        )
+
     }
 
     return (
         <div className="card mb-2 issue"
              onClick={ () => navigate(`/issues/issue/${issue.number}`)}
-             onMouseEnter={ () => onMouseEnter() }
+            //  onMouseEnter={ () => prefetchData() }
+             onMouseEnter={ () => preSetData() }
+
         >
             <div className="card-body d-flex align-items-center">
                 <div className='icon-status'>
