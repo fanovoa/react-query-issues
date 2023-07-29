@@ -1,22 +1,42 @@
 import { FiInfo, FiMessageSquare, FiCheckCircle } from 'react-icons/fi';
+import { Issue ,State } from '../interfaces';
+import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+interface Props {
+    issue : Issue
+}
 
 
-export const IssueItem = () => {
+export const IssueItem:FC<Props> = ( { issue }) => {
+
+    const navigate = useNavigate();
+
+    const { user, comments, state, number } = issue;
+    const { avatar_url , login  } = user;
     return (
-        <div className="card mb-2 issue">
+        <div className="card mb-2 issue"
+             onClick={ () => navigate(`/issues/issue/${issue.number}`)}
+        >
             <div className="card-body d-flex align-items-center">
+                <div className='icon-status'>
+                {
+                    state === State.Open
+                    ?   ( <FiInfo size={30} color="red" width={30} /> )
+                    :   ( <FiCheckCircle size={30} color="green"  width={30} />  )
+                }
+
+                </div>
                 
-                <FiInfo size={30} color="red" />
-                {/* <FiCheckCircle size={30} color="green" /> */}
 
                 <div className="d-flex flex-column flex-fill px-2">
-                    <span>Suggestion: why not make accessing and changing the state possible globally?</span>
-                    <span className="issue-subinfo">#25581 opened 2 days ago by <span className='fw-bold'>segfaulty1</span></span>
+                    <span>{issue.title}</span>
+                    <span className="issue-subinfo">#{number} opened 2 days ago by <span className='fw-bold'>{login}</span></span>
                 </div>
 
                 <div className='d-flex align-items-center'>
-                    <img src="https://avatars.githubusercontent.com/u/1933404?v=4" alt="User Avatar" className="avatar" />
-                    <span className='px-2'>2</span>
+                    <img src={avatar_url} alt="User Avatar" className="avatar" />
+                    <span className='px-2'>{comments}</span>
                     <FiMessageSquare />
                 </div>
 
