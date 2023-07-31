@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { getIssueComments, getIssueInfo } from '../hooks/useIssue';
+import { timeSince } from '../../helpers';
 
 interface Props {
     issue : Issue
@@ -63,7 +64,7 @@ export const IssueItem:FC<Props> = ( { issue }) => {
 
                 <div className="d-flex flex-column flex-fill px-2">
                     <span>{issue.title}</span>
-                    <span className="issue-subinfo">#{number} opened 2 days ago by <span className='fw-bold'>{login}</span></span>
+                    <span className="issue-subinfo">#{number} opened { timeSince(issue.created_at) }  ago by <span className='fw-bold'>{login}</span></span>
                     <span>
                         <div>
                            {
