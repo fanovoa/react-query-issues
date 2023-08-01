@@ -65,7 +65,6 @@ export const IssueItem:FC<Props> = ( { issue }) => {
                 <div className="d-flex flex-column flex-fill px-2">
                     <span>{issue.title}</span>
                     <span className="issue-subinfo">#{number} opened { timeSince(issue.created_at) }  ago by <span className='fw-bold'>{login}</span></span>
-                    <span>
                         <div>
                            {
                             issue.labels.map( label =>   (
@@ -76,7 +75,6 @@ export const IssueItem:FC<Props> = ( { issue }) => {
                             ))
                            }
                         </div>
-                    </span>
                 </div>
 
                 <div className='d-flex align-items-center'>

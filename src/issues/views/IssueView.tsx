@@ -12,10 +12,10 @@ export const IssueView = () => {
   const { issueQuery, issueCommentQuery } = useIssue(+id);
   
   if( issueQuery.isLoading)
-   return <LoadingIcon />
+    return (<LoadingIcon />)
 
    if( !issueQuery.data )
-     return ( <Navigate to="./issue/list" /> )
+    return ( <Navigate to="./issues/list" /> )
   
 
 

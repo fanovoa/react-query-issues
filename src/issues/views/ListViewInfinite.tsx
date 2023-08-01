@@ -6,7 +6,7 @@ import { State } from '../interfaces';
 import { useIssuesInfinite } from '../hooks';
 
 
-export const ListViewIfinite = () => {
+export const ListViewInfinite = () => {
 
   const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
   const [state, setState] = useState<State>();
@@ -33,7 +33,10 @@ export const ListViewIfinite = () => {
               /> )
         }
 
-        <button className='btn btn-outline-primary mt-2'>
+        <button className='btn btn-outline-primary mt-2'
+         disabled = { !issuesQuery.hasNextPage }
+         onClick={ () => issuesQuery.fetchNextPage() }
+        >
             Load more...
         </button>
       </div>

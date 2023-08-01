@@ -44,7 +44,7 @@ export const ListView = () => {
           <button 
               disabled={ issuesQuery.isFetching}
               className='btn btn-outline-primary'
-              onClick={() => { nextPage()}}
+              onClick={ nextPage }
           >Next</button>
         </div>
         
